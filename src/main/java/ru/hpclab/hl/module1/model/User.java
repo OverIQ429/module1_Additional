@@ -3,6 +3,7 @@ package ru.hpclab.hl.module1.model;
 
 import org.springframework.lang.NonNull;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 public class User {
@@ -11,10 +12,15 @@ public class User {
     private UUID identifier;
     @NonNull
     private String fio;
+    @NonNull
+    private String email;
+    @NonNull
+    private LocalDateTime registrationDate;
 
-    public User(@NonNull UUID identifier, @NonNull String fio) {
+    public User(@NonNull UUID identifier, @NonNull String fio, @NonNull String email) {
         this.identifier = identifier;
         this.fio = fio;
+        this.email = email;
     }
 
     public User() {
@@ -38,11 +44,31 @@ public class User {
         this.fio = fio;
     }
 
+    @NonNull
+    public String getEmail() {
+        return email;
+    }
+
+    @NonNull
+    public LocalDateTime getRegistrationDate() { //getter for new field
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(@NonNull LocalDateTime registrationDate) { //setter for new field
+        this.registrationDate = registrationDate;
+    }
+
+    public void setEmail(@NonNull String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "identifier=" + identifier +
                 ", fio='" + fio + '\'' +
+                ", email='" + email + '\'' +
+                ", registrationDate=" + registrationDate +
                 '}';
     }
 }

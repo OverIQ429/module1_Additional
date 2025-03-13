@@ -34,7 +34,7 @@ public class UserServiceTest {
     @Test
     public void testCreateAndGet(){
         //create
-        User user = new User(UUID.randomUUID(), "name");
+        User user = new User(UUID.randomUUID(), "name", "somemail.ru");
 
         User savedUser = userService.saveUser(user);
 
@@ -56,10 +56,10 @@ public class UserServiceTest {
         @Bean
         UserRepository userRepository() {
             UserRepository userRepository = mock(UserRepository.class);
-            when(userRepository.save(any())).thenReturn(new User(UUID.randomUUID(), "name"));
+            when(userRepository.save(any())).thenReturn(new User(UUID.randomUUID(), "name", "mail"));
             when(userRepository.findAll())
-                    .thenReturn(Arrays.asList(new User(UUID.randomUUID(), "name1"),
-                            new User(UUID.randomUUID(), "name2")));
+                    .thenReturn(Arrays.asList(new User(UUID.randomUUID(), "name1", "mail"),
+                            new User(UUID.randomUUID(), "name2", "mail")));
             return userRepository;
         }
 

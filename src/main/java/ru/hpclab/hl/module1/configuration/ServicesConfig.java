@@ -17,7 +17,7 @@ public class ServicesConfig {
     UserService userService(UserRepository userRepository) {
         UserService userService = new UserService(userRepository);
         for (int i = 0; i < 5; i++) {
-            userRepository.save(new User(UUID.randomUUID(), "new super user"));
+            userRepository.save(new User(UUID.randomUUID(), "new super user", "somemail.ru"));
         }
         return userService;
     }
