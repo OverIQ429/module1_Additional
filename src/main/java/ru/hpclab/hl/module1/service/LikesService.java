@@ -36,4 +36,17 @@ public class LikesService {
         likes.setIdentifier(UUID.fromString(id));
         return likesRepository.put(likes);
     }
+
+    public Likes addLike(UUID userId, UUID postId) {
+        // Проверяем, существует ли уже лайк от этого пользователя на этот пост
+        if (likesRepository.findByUserIdAndPostId(userId, postId).isPresent()) {
+            throw new IllegalStateException("User already liked this post"); // Или просто игнорируем
+        }
+
+        Likes like = new Likes();
+        like.setUserId(userId);
+        like.setPostId(postId);
+
+        return likesRepository.save(like);
+    }
 }

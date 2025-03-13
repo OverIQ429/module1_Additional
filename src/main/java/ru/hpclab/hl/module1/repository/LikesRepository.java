@@ -5,6 +5,7 @@ import org.springframework.util.ObjectUtils;
 import ru.hpclab.hl.module1.controller.exeption.UserException;
 import ru.hpclab.hl.module1.model.Likes;
 
+import java.util.Optional;
 import java.util.*;
 
 import static java.lang.String.format;
@@ -51,6 +52,11 @@ public class LikesRepository {
 
         return like;
     }
+    public Optional<Likes> findByUserIdAndPostId(UUID userId, UUID postId) {
+        return likes.values().stream()
+                .filter(like -> like.getUserId().equals(userId) && like.getPostId().equals(postId))
+                .findFirst();
+    }
 
     public Likes put(Likes like) {
         final var likesData = likes.get(like.getIdentifier());
@@ -67,6 +73,7 @@ public class LikesRepository {
 
         return like;
     }
+
 
     public void clear(){
         likes.clear();

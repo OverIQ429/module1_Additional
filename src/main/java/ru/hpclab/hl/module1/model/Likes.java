@@ -15,12 +15,36 @@ public class Likes {
     @NonNull
     private LocalDateTime publicationDate;
 
-    public Likes( @NonNull String fio, @NonNull UUID identifier) {
+    @NonNull
+    private UUID postId;
+
+    @NonNull
+    private UUID userId;
+
+    public Likes( @NonNull String fio, @NonNull UUID identifier, @NonNull UUID postId, @NonNull UUID userId) {
         this.identifier = identifier;
         this.fio = fio;
+        this.postId = postId;
+        this.userId = userId;
     }
 
     public Likes() {
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+    }
+
+    public UUID getPostId() {
+        return postId;
+    }
+
+    public void setPostId(UUID postId) {
+        this.postId = postId;
     }
 
     @NonNull
@@ -54,6 +78,7 @@ public class Likes {
     public String toString() {
         return "Likes{" +
                 "identifier_post=" + identifier +
+                ", post=" + postId + '\'' +
                 ", fio='" + fio + '\'' +
                 ", publicationDate=" + publicationDate +
                 '}';
