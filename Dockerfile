@@ -1,6 +1,8 @@
 FROM gradle:8.5-jdk21-alpine AS builder
 WORKDIR /opt/app
 
+
+
 RUN apk add --no-cache dos2unix
 
 COPY build.gradle settings.gradle ./
