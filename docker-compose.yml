@@ -32,7 +32,7 @@ services:
       start_period: 60s
 
   app:
-    image: geizerde/highly_loaded_systems_lab1:v1.0.0
+    image: socialnetwork
     container_name: spring-boot-app
     restart: always
     depends_on:
@@ -45,8 +45,6 @@ services:
     environment:
       DDL_AUTO: ${DDL_AUTO:-validate}
       SHOW_SQL: ${SHOW_SQL:-true}
-      FLYWAY_ENABLED: ${FLYWAY_ENABLED:-true}
-      FLYWAY_BASELINE: ${FLYWAY_BASELINE:-true}
       DB_HOST: ${DB_HOST:-database}
       DB_PORT: ${DB_PORT:-5432}
       DB_NAME: ${DB_NAME:-Social-NetWork}

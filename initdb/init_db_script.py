@@ -19,7 +19,6 @@ posts = [
 
 with open(file_path, "w") as f:
     f.write("""
-
 CREATE TABLE IF NOT EXISTS users (
     id uuid NOT NULL,
     email character varying(255) COLLATE pg_catalog."default",
