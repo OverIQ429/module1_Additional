@@ -15,9 +15,13 @@ public class Post {
     @NonNull
     private LocalDateTime publicationDate;
 
-    public Post(@NonNull UUID identifier, @NonNull String Text) {
+    @NonNull
+    private UUID owner;
+
+    public Post(@NonNull UUID identifier, @NonNull String Text, @NonNull UUID owner) {
         this.identifier = identifier;
         this.Text = Text;
+        this.owner = owner;
     }
 
     public Post() {
@@ -30,6 +34,15 @@ public class Post {
 
     public void setIdentifier(@NonNull UUID identifier) {
         this.identifier = identifier;
+    }
+
+    @NonNull
+    public UUID getOwner() {
+        return owner;
+    }
+
+    public void setOwner(@NonNull UUID owner) {
+        this.owner = owner;
     }
 
     @NonNull
