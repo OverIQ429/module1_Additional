@@ -11,9 +11,9 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    public void clearAllPosts() {
-        postRepository.deleteAll();
-    }
+//    public void clearAllPosts() {
+//        postRepository.deleteAll();
+//    }
     public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
     }

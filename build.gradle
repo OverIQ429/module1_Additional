@@ -5,13 +5,6 @@ plugins {
     id 'org.flywaydb.flyway' version '9.22.3'
 }
 
-flyway {
-    url = 'jdbc:postgresql://localhost:5432/Social-NetWork'
-    user = 'jimmy'
-    password = 'jimmy'
-    driver = 'org.postgresql.Driver'
-    baselineOnMigrate = true
-}
 
 group = 'ru.hpclab.hl'
 version '1.0-SNAPSHOT'
