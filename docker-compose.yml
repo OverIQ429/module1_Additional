@@ -14,8 +14,8 @@ services:
     container_name: pg-docker
     restart: always
     environment:
-      POSTGRES_USER: ${DB_USERNAME:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_USER: ${DB_USERNAME:-jimmy}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-jimmy}
       POSTGRES_DB: ${DB_NAME:-Social-NetWork}
     ports:
       - "${DB_PORT:-5432}:5432"
@@ -25,7 +25,7 @@ services:
       init-db:
         condition: service_completed_successfully
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-postgres} -d ${DB_NAME:-Social-NetWork}"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-jimmy} -d ${DB_NAME:-Social-NetWork}"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -48,8 +48,8 @@ services:
       DB_HOST: ${DB_HOST:-database}
       DB_PORT: ${DB_PORT:-5432}
       DB_NAME: ${DB_NAME:-Social-NetWork}
-      DB_USERNAME: ${DB_USERNAME:-postgres}
-      DB_PASSWORD: ${DB_PASSWORD:-postgres}
+      DB_USERNAME: ${DB_USERNAME:-jimmy}
+      DB_PASSWORD: ${DB_PASSWORD:-jimmy}
       DB_DIALECT: ${DB_DIALECT:-org.hibernate.dialect.PostgreSQLDialect}
 
   pgadmin:
