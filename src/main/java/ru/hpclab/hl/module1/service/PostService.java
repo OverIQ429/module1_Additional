@@ -1,20 +1,21 @@
 package ru.hpclab.hl.module1.service;
 
 import ru.hpclab.hl.module1.model.Post;
-import ru.hpclab.hl.module1.repository.PostRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.UUID;
-
+import ru.hpclab.hl.module1.repository.JpaPostRepository;
 @Service
 public class PostService {
 
-    private final PostRepository postRepository;
+    private final JpaPostRepository postRepository;
 
 //    public void clearAllPosts() {
 //        postRepository.deleteAll();
 //    }
-    public PostService(PostRepository postRepository) {
+    @Autowired
+    public PostService(JpaPostRepository postRepository) {
         this.postRepository = postRepository;
     }
 
@@ -23,7 +24,7 @@ public class PostService {
     }
 
     public Post getPostById(String id) {
-        return postRepository.findById(UUID.fromString(id));
+        return postRepository.findById(UUID.fromString(id)).orElse(null);
     }
 
     public Post savePost(Post post) {
@@ -31,11 +32,11 @@ public class PostService {
     }
 
     public void deletePost(String id) {
-        postRepository.delete(UUID.fromString(id));
+        postRepository.deleteById(UUID.fromString(id));;
     }
 
     public Post updatePost(String id, Post post) {
         post.setIdentifier(UUID.fromString(id));
-        return postRepository.put(post);
+        return postRepository.save(post);
     }
 }
