@@ -12,8 +12,7 @@ services:
   database:
     image: postgres:16
     volumes:
-      - pgdata:/var/lib/postgresql/data
-      - ./src/main/resources/db/migration:/V1__new_tables.sql
+      - db_data:/var/lib/postgresql/data
     container_name: pg-docker
     restart: always
     environment:
@@ -71,7 +70,7 @@ services:
         condition: service_healthy
 
 volumes:
-  pgdata:
+  db_data:
 
 networks:
   app-network:

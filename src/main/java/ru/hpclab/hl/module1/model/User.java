@@ -5,15 +5,25 @@ import org.springframework.lang.NonNull;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
+import jakarta.persistence.*;
+import java.util.UUID;
+import java.time.LocalDate;
+@Entity // Добавляем аннотацию @Entity
+@Table(name = "users") // Указываем имя таблицы в базе данных
 public class User {
 
+    @Id // Помечаем поле identifier как первичный ключ
+    @GeneratedValue(strategy = GenerationType.UUID) // Генерируем UUID автоматически
+    @Column(name = "identifier")
     @NonNull
     private UUID identifier;
+    @Column(name = "fio")
     @NonNull
     private String fio;
+    @Column(name = "email")
     @NonNull
     private String email;
+    @Column(name = "registration_date")
     @NonNull
     private LocalDateTime registrationDate;
 

@@ -36,43 +36,43 @@ CREATE TABLE IF NOT EXISTS likes (
 );
 
 INSERT INTO users (id, email, fio, registration_date)
-VALUES ('acd2ee30-d7d4-4160-b990-028edd507cb4', 'jimmy@mail.ru', 'Ivan Ivanov', '2006-05-15');
+VALUES ('a3fbb110-cef4-4358-b63f-6f36e357fb62', 'jimmy@mail.ru', 'Ivan Ivanov', '2006-05-15');
 
 INSERT INTO users (id, email, fio, registration_date)
-VALUES ('b79dd0f3-8e0f-4118-b412-debc743bc67f', 'billy@mail.ru', 'Anna Smirnova', '2006-08-20');
+VALUES ('c74ff1f6-4049-4bd9-ad8c-b370852a3e27', 'billy@mail.ru', 'Anna Smirnova', '2006-08-20');
 
 INSERT INTO posts (id, publication_date, text, "user")
-VALUES ('98fecce5-4f20-442f-bb0e-fe533e1ffc02', '2025-01-01', 'random_text', 'acd2ee30-d7d4-4160-b990-028edd507cb4');
+VALUES ('441de3c0-171b-4b8d-b78c-ad2cd6281894', '2025-01-01', 'random_text', 'a3fbb110-cef4-4358-b63f-6f36e357fb62');
 
 INSERT INTO posts (id, publication_date, text, "user")
-VALUES ('9fadc4eb-0366-49e6-bfea-de3b72e63d00', '2025-01-02', 'random_string', 'acd2ee30-d7d4-4160-b990-028edd507cb4');
+VALUES ('ff5af458-7b4f-416e-974e-15df54ea52b6', '2025-01-02', 'random_string', 'a3fbb110-cef4-4358-b63f-6f36e357fb62');
 
 INSERT INTO likes (id, publication_date, owner_id, user_id)
-VALUES ('221c3a89-2241-4002-995a-e04955ece2ad', '2024-04-23', '98fecce5-4f20-442f-bb0e-fe533e1ffc02', 'acd2ee30-d7d4-4160-b990-028edd507cb4');
+VALUES ('52adad2e-7df8-4fed-a718-b1c13dc6414b', '2024-09-02', 'ff5af458-7b4f-416e-974e-15df54ea52b6', 'c74ff1f6-4049-4bd9-ad8c-b370852a3e27');
 
 INSERT INTO likes (id, publication_date, owner_id, user_id)
-VALUES ('b9e8b9c5-5844-4b17-a4ef-4cd11452026c', '2025-04-13', '98fecce5-4f20-442f-bb0e-fe533e1ffc02', 'b79dd0f3-8e0f-4118-b412-debc743bc67f');
+VALUES ('e2707962-4c1c-49f4-a2be-adb313bed314', '2024-10-05', 'ff5af458-7b4f-416e-974e-15df54ea52b6', 'c74ff1f6-4049-4bd9-ad8c-b370852a3e27');
 
 INSERT INTO likes (id, publication_date, owner_id, user_id)
-VALUES ('89bd7564-d400-4d57-8898-b487afca5440', '2024-10-07', '9fadc4eb-0366-49e6-bfea-de3b72e63d00', 'b79dd0f3-8e0f-4118-b412-debc743bc67f');
+VALUES ('eaf0316e-69a0-4032-a16d-fd271b25ca06', '2025-02-14', 'ff5af458-7b4f-416e-974e-15df54ea52b6', 'c74ff1f6-4049-4bd9-ad8c-b370852a3e27');
 
 INSERT INTO likes (id, publication_date, owner_id, user_id)
-VALUES ('59593948-444b-4a79-959c-ec7b21d49e2e', '2025-03-12', '9fadc4eb-0366-49e6-bfea-de3b72e63d00', 'b79dd0f3-8e0f-4118-b412-debc743bc67f');
+VALUES ('e70a8405-e5e6-4391-9545-2f23b35e7f1e', '2025-03-14', '441de3c0-171b-4b8d-b78c-ad2cd6281894', 'a3fbb110-cef4-4358-b63f-6f36e357fb62');
 
 INSERT INTO likes (id, publication_date, owner_id, user_id)
-VALUES ('943ffe42-dfa4-4f67-94d7-ef69ea7838e9', '2025-02-12', '9fadc4eb-0366-49e6-bfea-de3b72e63d00', 'b79dd0f3-8e0f-4118-b412-debc743bc67f');
+VALUES ('06d71188-1eb0-4041-b113-eed999527747', '2024-11-18', 'ff5af458-7b4f-416e-974e-15df54ea52b6', 'c74ff1f6-4049-4bd9-ad8c-b370852a3e27');
 
 INSERT INTO likes (id, publication_date, owner_id, user_id)
-VALUES ('a850b31f-408d-4a18-8c90-3f9c844f4243', '2024-09-21', '98fecce5-4f20-442f-bb0e-fe533e1ffc02', 'acd2ee30-d7d4-4160-b990-028edd507cb4');
+VALUES ('1a51817f-4f0c-41fb-9978-92ae04d8b459', '2024-11-23', '441de3c0-171b-4b8d-b78c-ad2cd6281894', 'c74ff1f6-4049-4bd9-ad8c-b370852a3e27');
 
 INSERT INTO likes (id, publication_date, owner_id, user_id)
-VALUES ('22d5b199-5dd7-4026-910f-4fd860b68a6f', '2024-10-26', '98fecce5-4f20-442f-bb0e-fe533e1ffc02', 'b79dd0f3-8e0f-4118-b412-debc743bc67f');
+VALUES ('169ec0e3-30b9-4db3-8668-8959756513f6', '2024-08-17', '441de3c0-171b-4b8d-b78c-ad2cd6281894', 'c74ff1f6-4049-4bd9-ad8c-b370852a3e27');
 
 INSERT INTO likes (id, publication_date, owner_id, user_id)
-VALUES ('e6650c97-3537-4818-bb05-2818cfd39d35', '2024-06-02', '98fecce5-4f20-442f-bb0e-fe533e1ffc02', 'acd2ee30-d7d4-4160-b990-028edd507cb4');
+VALUES ('c1f85828-7d4b-4ac1-b183-56c5b2aa8bc9', '2024-08-01', 'ff5af458-7b4f-416e-974e-15df54ea52b6', 'c74ff1f6-4049-4bd9-ad8c-b370852a3e27');
 
 INSERT INTO likes (id, publication_date, owner_id, user_id)
-VALUES ('4034b832-1d43-4ae4-9138-9c72a4e2aad2', '2024-12-24', '9fadc4eb-0366-49e6-bfea-de3b72e63d00', 'b79dd0f3-8e0f-4118-b412-debc743bc67f');
+VALUES ('299ad060-672d-4692-be05-278836ab8123', '2024-08-08', 'ff5af458-7b4f-416e-974e-15df54ea52b6', 'c74ff1f6-4049-4bd9-ad8c-b370852a3e27');
 
 INSERT INTO likes (id, publication_date, owner_id, user_id)
-VALUES ('4996c3dc-f5e4-4af8-ac63-65f17326e317', '2024-05-26', '9fadc4eb-0366-49e6-bfea-de3b72e63d00', 'acd2ee30-d7d4-4160-b990-028edd507cb4');
+VALUES ('1a197173-22d7-4322-b03f-904700836eed', '2024-05-18', '441de3c0-171b-4b8d-b78c-ad2cd6281894', 'c74ff1f6-4049-4bd9-ad8c-b370852a3e27');

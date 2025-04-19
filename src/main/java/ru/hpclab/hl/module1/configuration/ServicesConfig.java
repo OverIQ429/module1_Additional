@@ -4,7 +4,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import ru.hpclab.hl.module1.model.User;
-import ru.hpclab.hl.module1.repository.UserRepository;
+import ru.hpclab.hl.module1.repository.JpaUserRepository;
 import ru.hpclab.hl.module1.service.StatisticsService;
 import ru.hpclab.hl.module1.service.UserService;
 
@@ -14,10 +14,10 @@ import java.util.UUID;
 public class ServicesConfig {
 
     @Bean
-    UserService userService(UserRepository userRepository) {
+    UserService userService(JpaUserRepository userRepository) {
         UserService userService = new UserService(userRepository);
         for (int i = 0; i < 5; i++) {
-            userRepository.save(new User(UUID.randomUUID(), "new super user", "somemail.ru"));
+            //userRepository.save(new User(UUID.randomUUID(), "new super user", "somemail.ru"));
         }
         return userService;
     }
