@@ -13,10 +13,10 @@ import java.util.UUID;
 public class PostController {
 
 
-//    @DeleteMapping("/posts/clear")
-//    public void clearAllPosts() {
-//        postService.clearAllPosts();
-//    }
+    @DeleteMapping("/posts/clear")
+    public void clearAllPosts() {
+        postService.clearAllPosts();
+    }
     private final PostService postService;
 
     @Autowired

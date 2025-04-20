@@ -1,23 +1,33 @@
 package ru.hpclab.hl.module1.model;
 
 
+import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
+@Table(name = "likes")
 public class Likes {
 
+    @Id // Помечаем поле identifier как первичный ключ
+    @GeneratedValue(strategy = GenerationType.UUID) // Генерируем UUID автоматически
+    @Column(name = "id")
     @NonNull
     private UUID identifier;
+    @Column(name = "fio")
     @NonNull
     private String fio;
+    @Column(name = "publication_date")
     @NonNull
     private LocalDateTime publicationDate;
 
+    @Column(name = "owner")
     @NonNull
     private UUID postId;
 
+    @Column(name = "person")
     @NonNull
     private UUID userId;
 

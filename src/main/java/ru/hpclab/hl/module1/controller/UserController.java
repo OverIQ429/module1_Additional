@@ -7,6 +7,7 @@ import ru.hpclab.hl.module1.service.UserService;
 import java.util.List;
 
 @RestController
+@RequestMapping
 public class UserController {
 
     private final UserService userService;
@@ -37,10 +38,10 @@ public class UserController {
     }
 
 
-//    @DeleteMapping("/users/clear")
-//    public void clearAllUsers() {
-//        userService.clearAllUsers();
-//    }
+    @DeleteMapping("/users/clear")
+    public void clearAllUsers() {
+        userService.clearAllUsers();
+    }
     @PutMapping(value = "/users/{id}")
     public User updateUser(@PathVariable(required = false) String id, @RequestBody User user) {
         return userService.updateUser(id, user);

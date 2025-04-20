@@ -1,6 +1,7 @@
 package ru.hpclab.hl.module1.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.hpclab.hl.module1.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -29,9 +31,9 @@ public class UserService {
         return userRepository.findById(UUID.fromString(id)).orElse(null);
     }
 
-//    public void clearAllUsers() {
-//        userRepository.deleteAll();
-//    }
+    public void clearAllUsers() {
+        userRepository.deleteAll();
+    }
     public User saveUser(User user) {
         logger.info("Сохранение пользователя: {}", user);
         User savedUser = userRepository.save(user);

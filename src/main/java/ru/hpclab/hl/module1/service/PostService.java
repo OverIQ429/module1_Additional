@@ -1,5 +1,6 @@
 package ru.hpclab.hl.module1.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import ru.hpclab.hl.module1.model.Post;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,10 @@ public class PostService {
 
     private final JpaPostRepository postRepository;
 
-//    public void clearAllPosts() {
-//        postRepository.deleteAll();
-//    }
+    @Transactional
+    public void clearAllPosts() {
+        postRepository.deleteAll();
+    }
     @Autowired
     public PostService(JpaPostRepository postRepository) {
         this.postRepository = postRepository;
