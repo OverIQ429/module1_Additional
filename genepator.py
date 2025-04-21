@@ -2,6 +2,8 @@ import requests
 from faker import Faker
 import random
 import argparse
+import datetime
+
 
 fake = Faker()
 
@@ -20,7 +22,10 @@ class DataGenerator:
 
     def create_user(self):
         """Создает одного пользователя со случайными данными"""
+        now = datetime.datetime.now()
+        formatted_datetime = now.isoformat(timespec='milliseconds')
         data = {
+            "registrationDate": formatted_datetime,
             "fio": fake.name(),
             "email": fake.email()
         }
