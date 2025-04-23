@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.hpclab.hl.module1.model.User;
 import ru.hpclab.hl.module1.service.UserService;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping
@@ -20,6 +21,11 @@ public class UserController {
     @GetMapping("/users")
     public List<User> getUsers() {
         return userService.getAllUsers();
+    }
+
+    @GetMapping("/users/selflikes")
+    public List<Map<String, Object>> getselflikesUsers() {
+        return userService.getSelflikesUser();
     }
 
     @GetMapping("/users/{id}")

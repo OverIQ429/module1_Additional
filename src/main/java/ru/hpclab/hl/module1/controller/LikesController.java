@@ -47,4 +47,9 @@ public class LikesController {
         return likesService.updateLikes(id, likes);
     }
 
+    @GetMapping("/likes/selflikes")
+    public List<Likes> get_selfLikes() {
+        return likesService.getAllLikes();
+    }
+
 }

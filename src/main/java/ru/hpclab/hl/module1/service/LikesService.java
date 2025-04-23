@@ -6,8 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hpclab.hl.module1.model.Likes;
 import ru.hpclab.hl.module1.repository.JpaLikesRepository;
-import java.util.List;
-import java.util.UUID;
+
+import java.util.*;
+
 import ru.hpclab.hl.module1.repository.JpaPostRepository;
 import ru.hpclab.hl.module1.model.Post;
 @Service
@@ -16,12 +17,13 @@ public class LikesService {
     private static final Logger logger = LoggerFactory.getLogger(LikesService.class);
     private final JpaLikesRepository likesRepository;
 
+    private static final Map<UUID, List<UUID>> selfLikesMap = new HashMap<>();
 
     public void clearAllLikes() {
         likesRepository.deleteAll();
     }
 
-    public LikesService(JpaLikesRepository likesRepository) {
+    public LikesService(JpaLikesRepository likesRepository, JpaPostRepository postRepository) {
         this.likesRepository = likesRepository;
     }
 
@@ -46,17 +48,19 @@ public class LikesService {
         return likesRepository.save(likes);
     }
 
-//    public Likes addLike(UUID userId, UUID postId) {
+//    public Map<UUID, List<UUID>> get_selfLikes(UUID userId, UUID postId) {
 //        // Проверяем, существует ли уже лайк от этого пользователя на этот пост
 //        Post post = postRepository.findById(postId).orElse(null);
 //        if (post.getOwner().equals(userId)) {
 //            logger.warn("Пользователь {} поставил лайк своему собственному посту {}", userId, postId);
+//            selfLikesMap.computeIfAbsent(userId, k -> new ArrayList<>()).add(postId);
 //        }
-//
 //        Likes like = new Likes();
 //        like.setUserId(userId);
 //        like.setPostId(postId);
+//        likesRepository.save(like);
 //
-//        return likesRepository.save(like);
+//        // Возвращаем текущую карту самолайков
+//        return selfLikesMap;
 //    }
 }
