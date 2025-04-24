@@ -53,7 +53,7 @@ services:
     networks:
       - app-network
     environment:
-      DB_URL: jdbc:postgresql://10.60.3.26:5432/Social-NetWork
+      DB_URL: jdbc:postgresql://database:5432/Social-NetWork
       DDL_AUTO: ${DDL_AUTO:-validate}
       SHOW_SQL: ${SHOW_SQL:-true}
       DB_HOST: ${DB_HOST:-database}

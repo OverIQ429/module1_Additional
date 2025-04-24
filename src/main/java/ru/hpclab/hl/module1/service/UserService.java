@@ -34,9 +34,9 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserById(String id) {
+    public User getUserById(UUID id) {
         logger.info("Получение пользователя по ID: {}", id);
-        return userRepository.findById(UUID.fromString(id)).orElse(null);
+        return userRepository.findById(id).orElse(null);
     }
 
     public void clearAllUsers() {
@@ -64,41 +64,36 @@ public class UserService {
     }
 
     public List<Map<String, Object>> getSelflikesUser() {
-        List<Map<String, Object>> result = new ArrayList<>();
         List<Likes> allLikes = likesRepository.findAll();
-        List<User> allUsers = userRepository.findAll();
-
-        // Создаем временный кэш постов для оптимизации
         Map<UUID, Post> postCache = postRepository.findAll().stream()
                 .collect(Collectors.toMap(Post::getIdentifier, post -> post));
 
-        for (User user : allUsers) {
-            int selfLikeCount = 0;
-            List<Map<String, Object>> selfLikedPosts = new ArrayList<>();
+        // Мапа для хранения данных о пользователях и их самолайках
+        Map<UUID, Map<String, Object>> userDataMap = new HashMap<>();
 
-            for (Likes like : allLikes) {
-                Post post = postCache.get(like.getPostId());
-                if (post != null && post.getOwner().equals(like.getUserId())) {
-                    selfLikeCount++;
-
-                    // Добавляем информацию о посте
-                    Map<String, Object> postInfo = new HashMap<>();
-                    postInfo.put("postId", post.getIdentifier());
-                    selfLikedPosts.add(postInfo);
+        for (Likes like : allLikes) {
+            Post post = postCache.get(like.getPostId());
+            if (post != null && post.getOwner() != null && post.getOwner().equals(like.getUserId())) {
+                // Если пользователь уже есть в мапе, увеличиваем счетчик
+                if (userDataMap.containsKey(like.getUserId())) {
+                    Map<String, Object> userInfo = userDataMap.get(like.getUserId());
+                    userInfo.put("selfLikeCount", (Integer) userInfo.get("selfLikeCount") + 1);
                 }
-            }
-
-            if (selfLikeCount > 0) {
-                Map<String, Object> userInfo = new HashMap<>();
-                userInfo.put("userId", user.getIdentifier());
-                userInfo.put("selfLikeCount", selfLikeCount);
-                userInfo.put("selfLikedPosts", selfLikedPosts);
-                result.add(userInfo);
+                // Иначе добавляем нового пользователя
+                else {
+                    User user = getUserById(like.getUserId());
+                    Map<String, Object> userInfo = new HashMap<>();
+                    userInfo.put("fio", user.getFio());
+                    userInfo.put("userId", like.getUserId());
+                    userInfo.put("selfLikeCount", 1);
+                    userDataMap.put(like.getUserId(), userInfo);
+                }
             }
         }
 
-        // Сортируем по количеству самолайков (по убыванию)
-        result.sort((a, b) -> ((Integer)b.get("selfLikeCount")).compareTo((Integer)a.get("selfLikeCount")));
+        // Преобразуем в список и сортируем
+        List<Map<String, Object>> result = new ArrayList<>(userDataMap.values());
+        result.sort((a, b) -> ((Integer) b.get("selfLikeCount")).compareTo((Integer) a.get("selfLikeCount")));
 
         return result;
     }

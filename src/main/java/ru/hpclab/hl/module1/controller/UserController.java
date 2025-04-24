@@ -6,6 +6,7 @@ import ru.hpclab.hl.module1.model.User;
 import ru.hpclab.hl.module1.service.UserService;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping
@@ -29,7 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public User getUserById(@PathVariable String id) {
+    public User getUserById(@PathVariable UUID id) {
         return userService.getUserById(id);
     }
 
