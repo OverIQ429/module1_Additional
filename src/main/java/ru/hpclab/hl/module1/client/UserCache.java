@@ -20,16 +20,13 @@ public class UserCache {
         User user = cache.get(userId);
         if (user != null) {
             hits.incrementAndGet();
-            System.out.println("[CACHE HIT] User ID: " + userId);
             return user;
         }
         misses.incrementAndGet();
-        System.out.println("[CACHE MISS] User ID: " + userId);
         return null;
     }
 
     public void put(UUID userId, User user) {
-        System.out.println("[CACHE PUT] User ID: " + userId);
         cache.put(userId, user);
     }
 
