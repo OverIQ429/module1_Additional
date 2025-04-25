@@ -62,9 +62,9 @@ public class SelfLikesService {
                 else {
                     Map<String, Object> userInfo = new HashMap<>();
                     userInfo.put("fio", user.getFio());
-                    userInfo.put("userId", like.getUserId());
+                    userInfo.put("userId", user.getIdentifier());
                     userInfo.put("selfLikeCount", 1);
-                    userDataMap.put(like.getUserId(), userInfo);
+                    userDataMap.put(user.getIdentifier(), userInfo);
                 }
             }
         }
