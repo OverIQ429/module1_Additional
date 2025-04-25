@@ -15,7 +15,7 @@ import java.util.UUID;
 @Component
 public class CrudServiceClientImpl implements CrudServiceClient {
     private final RestTemplate restTemplate;
-    private final String crudServiceUrl = "http://localhost:8080";
+    private final String crudServiceUrl = "http://crud-service:8080";
 
     public CrudServiceClientImpl(RestTemplate restTemplate, UserCache userCache) {
         this.restTemplate = restTemplate;
@@ -42,7 +42,7 @@ public class CrudServiceClientImpl implements CrudServiceClient {
     @Override
     public User getUserById(UUID id) {
         return restTemplate.getForObject(
-                crudServiceUrl + "/user/" + id,
+                crudServiceUrl + "/users/" + id,
                 User.class
         );
     }

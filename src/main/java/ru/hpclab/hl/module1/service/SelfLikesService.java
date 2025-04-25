@@ -40,7 +40,9 @@ public class SelfLikesService {
     }
 
     public List<Map<String, Object>> getSelflikesUser() {
+        logger.info("Starting getSelflikesUser processing");
         List<Likes> allLikes = likesRepository.findAll();
+        logger.info("Found {} likes", allLikes.size());
         Map<UUID, Map<String, Object>> userDataMap = new HashMap<>();
 
         for (Likes like : allLikes) {
