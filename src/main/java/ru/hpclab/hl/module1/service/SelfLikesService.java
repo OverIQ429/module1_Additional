@@ -11,13 +11,14 @@ import org.slf4j.LoggerFactory;
 import ru.hpclab.hl.module1.repository.JpaLikesRepository;
 import ru.hpclab.hl.module1.repository.JpaPostRepository;
 import ru.hpclab.hl.module1.repository.JpaUserRepository;
+import ru.hpclab.hl.module1.service.statistics.ObservabilityService;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class SelfLikesService {
-
+    private final ObservabilityService observabilityService;
     private final JpaUserRepository userRepository;
 
     private final UserCache userCache;
@@ -26,20 +27,25 @@ public class SelfLikesService {
     private static final Logger logger = LoggerFactory.getLogger(SelfLikesService.class); // Исправлена инициализация логгера
 
 
-    public SelfLikesService(JpaUserRepository  userRepository, CrudServiceClient crudServiceClient, JpaPostRepository postRepository, UserCache userCache, JpaLikesRepository likesRepository) {
+    public SelfLikesService(JpaUserRepository  userRepository, CrudServiceClient crudServiceClient, JpaPostRepository postRepository, ObservabilityService observabilityService, UserCache userCache, JpaLikesRepository likesRepository) {
         this.userRepository = userRepository;
         this.crudServiceClient = crudServiceClient;
+        this.observabilityService = observabilityService;
         this.userCache = userCache;
         this.likesRepository = likesRepository;
     }
 
 
     public User getUserById(UUID id) {
+        this.observabilityService.start(getClass().getSimpleName() + ":create");
         logger.info("Получение пользователя по ID: {}", id);
-        return userRepository.findById(id).orElse(null);
+        User term = userRepository.findById(id).orElse(null);
+        this.observabilityService.stop(getClass().getSimpleName() + ":clearAllArtists");
+        return term;
     }
 
     public List<Map<String, Object>> getSelflikesUser() {
+        this.observabilityService.start(getClass().getSimpleName() + ":create");
         logger.info("Starting getSelflikesUser processing");
         List<Likes> allLikes = likesRepository.findAll();
         logger.info("Found {} likes", allLikes.size());
@@ -73,7 +79,7 @@ public class SelfLikesService {
 
         List<Map<String, Object>> result = new ArrayList<>(userDataMap.values());
         result.sort((a, b) -> ((Integer) b.get("selfLikeCount")).compareTo((Integer) a.get("selfLikeCount")));
-
+        this.observabilityService.stop(getClass().getSimpleName() + ":clearAllArtists");
         return result;
     }
 }
