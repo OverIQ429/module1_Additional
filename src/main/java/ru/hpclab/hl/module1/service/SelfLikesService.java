@@ -1,5 +1,6 @@
 package ru.hpclab.hl.module1.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.hpclab.hl.module1.client.CrudServiceClient;
 import ru.hpclab.hl.module1.client.UserCache;
@@ -26,7 +27,7 @@ public class SelfLikesService {
     private final JpaLikesRepository likesRepository;
     private static final Logger logger = LoggerFactory.getLogger(SelfLikesService.class); // Исправлена инициализация логгера
 
-
+    @Autowired
     public SelfLikesService(JpaUserRepository  userRepository, CrudServiceClient crudServiceClient, JpaPostRepository postRepository, ObservabilityService observabilityService, UserCache userCache, JpaLikesRepository likesRepository) {
         this.userRepository = userRepository;
         this.crudServiceClient = crudServiceClient;
