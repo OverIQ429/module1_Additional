@@ -39,7 +39,6 @@ public class SelfLikesService {
 
     public User getUserById(UUID id) {
         this.observabilityService.start(getClass().getSimpleName() + ":create");
-        logger.info("Получение пользователя по ID: {}", id);
         User term = userRepository.findById(id).orElse(null);
         this.observabilityService.stop(getClass().getSimpleName() + ":clearAllArtists");
         return term;
@@ -47,9 +46,7 @@ public class SelfLikesService {
 
     public List<Map<String, Object>> getSelflikesUser() {
         this.observabilityService.start(getClass().getSimpleName() + ":create");
-        logger.info("Starting getSelflikesUser processing");
         List<Likes> allLikes = likesRepository.findAll();
-        logger.info("Found {} likes", allLikes.size());
         Map<UUID, Map<String, Object>> userDataMap = new HashMap<>();
 
         for (Likes like : allLikes) {

@@ -67,10 +67,10 @@ public class ObservabilityService {
         Set<String> uniqueNames = getUniqueNamesByTiming(snapshot);
 
         // сюда собираем статистику и потом выводим единым выводом
-        Map<String, Map<Integer, Double>> stats = new HashMap<>();
+        Map<String, Map<Integer, Statistic>> stats = new HashMap<>();
 
         for (String name : uniqueNames) {
-            Map<Integer, Double> intervalStats = new HashMap<>();
+            Map<Integer, Statistic> intervalStats = new HashMap<>();
             for (int interval : intervals) {
                 List<Timing> filteredTimings = snapshot.stream()
                         .filter(t -> t.getStop() != PENDING_STOP
@@ -84,7 +84,8 @@ public class ObservabilityService {
                             .mapToLong(t -> Duration.between(t.getStart(), t.getStop()).toMillis())
                             .average().getAsDouble();
 
-                    intervalStats.put(interval, averageDuration / 1000); // секунды
+                    int callCount = filteredTimings.size();
+                    intervalStats.put(interval, new Statistic(averageDuration / 1000, callCount));
                 }
             }
             if (!intervalStats.isEmpty()) {
@@ -96,15 +97,35 @@ public class ObservabilityService {
         String timestamp = "[" + formatter.format(now) + "]";
         System.out.println("\nPrint observability statistics in delay: " + delay);
 
-        for (Map.Entry<String, Map<Integer, Double>> entry : stats.entrySet()) {
+        for (Map.Entry<String, Map<Integer, Statistic>> entry : stats.entrySet()) {
             String name = entry.getKey();
-            Map<Integer, Double> intervalStats = entry.getValue();
+            Map<Integer, Statistic> intervalStats = entry.getValue();
 
-            for (Map.Entry<Integer, Double> statEntry : intervalStats.entrySet()) {
+            for (Map.Entry<Integer, Statistic> statEntry : intervalStats.entrySet()) {
                 int interval = statEntry.getKey();
-                double avg = statEntry.getValue();
-                System.out.println(timestamp + " - " + interval + " : " + name + " - " + avg + " s.");
+                Statistic stat = statEntry.getValue();
+                System.out.println(timestamp + " - " + interval + " : " + name +
+                        " - avg: " + stat.getAverage() + " s., calls: " + stat.getCallCount());
             }
+        }
+    }
+
+    // Вспомогательный класс для хранения статистики
+    class Statistic {
+        private final double average;
+        private final int callCount;
+
+        public Statistic(double average, int callCount) {
+            this.average = average;
+            this.callCount = callCount;
+        }
+
+        public double getAverage() {
+            return average;
+        }
+
+        public int getCallCount() {
+            return callCount;
         }
     }
 }
